@@ -23,14 +23,18 @@ body{
   flex-wrap: wrap;
   width: 1200px;
   transform-style: preserve-3d;
+  
 }
 .container .box {
   position: relative;
+  border-radius: 20px;
   width: 300px;
   height: 400px;
   margin: 40px;
   background: #232323;
   transform-style: preserve-3d;
+  transform:  perspective(1000px);
+  transform: translateZ(20px);
 }
 .container .box::before{
   content: 'NIKE';
@@ -102,31 +106,32 @@ body{
 }
 .container .box .circle {
   position: absolute;
-  /* top: 50%;
-  left: 50%; */
+  top: 50%;
+  left: 50%;
   width: 200px;
   height: 200px;
   border-radius: 50% ;
   transition: 0.5s;
   background: white;
-  z-index: 10;
-  transform-style: preserve-3d;
-  transform: translate3d(50% , 100%, 50px);
-  transform: translate3d(25%, 50%, 50px);
+  z-index: -10;
+  transform-style: preserve-3d;  
+  transform: translate3d(-50%, -50%, 50px);
   opacity: 1;
 }
 
-.container .box:hover .circle {
-  opacity: 1;
-  transform: translate3d(25%, 50%, 50px);
-}
 .container .box .product {
   position: absolute;
   top: 50%;
   left: 50%;
   max-width: 300px;
   transition: 0.5s;
-  z-index: 99;
+  z-index: 11;
+  transition: 0.5s;
   transform-style: preserve-3d;
-  transform: translate3d(-50%, -50%, 0px) rotate(-15deg) ;
+  transform: translate3d(-50%, -50%, 50px) rotate(-15deg) ;
 }
+
+.container .box:nth-child(1) .circle,
+.container .box:nth-child(1) .buy{
+  background: #379bf7;
+} 
