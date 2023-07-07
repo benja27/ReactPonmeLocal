@@ -135,3 +135,61 @@ body{
 .container .box:nth-child(1) .buy{
   background: #379bf7;
 } 
+
+
+
+
+/* card */
+
+
+.card-container{
+  overflow: hidden;
+}
+
+.card {
+  background: url("https://picsum.photos/300");
+  background-size: cover;
+  transition: 0.5s;
+  color: white;
+  transform-style: preserve-3d ;
+  width: 300px;
+  height: 400px;
+  position: relative;
+}
+
+.card::before{
+  content: "";
+  
+  background-color: red;
+  width: 100%;
+}
+
+.card:hover{
+  transform: scale(1.4);
+}
+
+.test {
+  width: 150px;
+}
+
+.card .test {
+  transition: 0,5s;
+}
+
+.card:hover .test {
+  transform: rotate(-15deg);
+  transition: .3s;
+}
+.card h3:nth-child(1)  {
+  position: absolute;
+  left: 50%;
+}
+.card h3:nth-child(2)  {
+  position: absolute;
+  bottom: 25px;
+}
+
+.test-container {
+  position: absolute;
+  top: 50%;
+}
