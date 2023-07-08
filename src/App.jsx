@@ -1,14 +1,15 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import Ecard3d from "./components/Ecard3d";
+import Compo from "./components/Compo";
+
 import "./App.css";
-import Card from "./components/card";
+
 
 function App() {
   return (
-    <div className="">
-      
+    <div className="asdf">
+      <Compo></Compo>
     </div>
   );
 }
