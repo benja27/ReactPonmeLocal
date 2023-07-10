@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Mapas, mapLoader } from "../maps/mapsCofig";
 import storage from "../redux/contador";
-import { db } from "../firebase/FireSetUp";
+// import { db } from "../firebase/FireSetUp";
+import {  firestore } from "../firebase/FireSetUp"
 import { addDoc, collection } from "firebase/firestore";
 
 let mapas = new Mapas();
@@ -158,13 +159,23 @@ function Maps() {
     console.log(results)
     let confirmar = confirm("estas seguro?")
     if(confirmar){
-      addDoc( collection(db, "direcciones"), {addres: 'hola' } )
-        .then(()=>{
-          console.log("added sucessfully")
-        })
-        .catch((e)=>{
-          console.log(e)
-        })
+
+      firestore.collection( "address" ).add({
+        address : results[0].formatted_address
+      })
+      .then(()=>{
+        console.log("did it sucessfully")
+      })
+      .catch(e=>{
+        console.log("error")
+      })
+      // addDoc( collection(db, "direcciones"), {addres: 'hola' } )
+      //   .then(()=>{
+      //     console.log("added sucessfully")
+      //   })
+      //   .catch((e)=>{
+      //     console.log(e)
+      //   })
     }
   }
 

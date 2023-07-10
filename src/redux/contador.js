@@ -2,7 +2,8 @@ import { create } from "zustand";
 
  const storage = create((set)=>({   
   results : [],
-  selected : [],  
+  selected : [],
+  user: [],  
   saveResults : (value) =>{
     set( state=>({
       results : value
@@ -12,6 +13,11 @@ import { create } from "zustand";
     set( state=>({
       selected: value
     }) )
+  },
+  setUser : (value) => {
+    set(state =>({
+      user : value
+    }))
   } 
   
 }))

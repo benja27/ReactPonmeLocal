@@ -3,6 +3,10 @@
   border: 1px solid black;
 }
 
+#root{
+  min-height: 100vh;
+}
+
 #map{
   margin: 0 auto ;
   width: 700px;
@@ -11,4 +15,7 @@
 }
 
 
-
+.main-section img{
+  width: 100%;
+  border-radius: 15px;
+}
