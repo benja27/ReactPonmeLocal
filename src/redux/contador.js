@@ -1,19 +1,19 @@
 import { create } from "zustand";
 
- const counter = create((set)=>({
-  count : 10,
-  title : "la pagina del benja ",
-  increment : (value) =>{
-    set(state=>({
-      count: state.count + value 
+ const storage = create((set)=>({   
+  results : [],
+  selected : [],  
+  saveResults : (value) =>{
+    set( state=>({
+      results : value
     }))
   },
-  decrement : (value)=>{
-    set(state=>({
-      count : state.count - value
-    }))
-  }
+  setSelected : (value) =>{
+    set( state=>({
+      selected: value
+    }) )
+  } 
   
 }))
 
-export default counter
+export default storage

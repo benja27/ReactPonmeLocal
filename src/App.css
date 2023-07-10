@@ -1,4 +1,14 @@
-body {
-  background-color: #333;
-  color: white;
+.check,
+.check * {
+  border: 1px solid black;
 }
+
+#map{
+  margin: 0 auto ;
+  width: 700px;
+  height: 500px;
+  margin-bottom: 200px;
+}
+
+
+

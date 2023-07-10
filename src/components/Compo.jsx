@@ -1,10 +1,10 @@
-import counter from "../redux/contador";
+import storage from "../redux/contador";
 import { db } from "../firebase/FireSetUp";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 
 function Compo() {
-  const { count, title } = counter();
-  const { increment, decrement } = counter();
+  const { count, title } = storage();
+  const { increment, decrement } = storage();
 
   function col(ref) {
     return collection(db, ref);
@@ -16,7 +16,7 @@ function Compo() {
     });
   }
 
-  Add("user", { username: "benja" });
+  // Add("user", { username: "benja" });
 
   function fetchAlldocs(name) {
     getDocs(col(name)).then((results) => {
