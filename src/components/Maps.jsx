@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Mapas, mapLoader } from "../maps/mapsCofig";
 import storage from "../redux/contador";
+import { db } from "../firebase/FireSetUp";
+import { addDoc, collection } from "firebase/firestore";
 
 let mapas = new Mapas();
 let geocoder;
@@ -124,12 +126,14 @@ function Maps() {
       });
     }
 
-    async function createmarkers() {
-      let number = await geolocation();
-      console.log(number);
-    }
+    geolocation()
 
-    createmarkers();
+    // async function createmarkers() {
+    //   let number = await geolocation();
+    //   console.log(number);
+    // }
+
+    // createmarkers();
   }
 
   function handleSelect(ele) {
@@ -150,8 +154,18 @@ function Maps() {
     });
   }
 
-  function handleClick() {
-    console.log(map);
+  function setAddress() {
+    console.log(results)
+    let confirmar = confirm("estas seguro?")
+    if(confirmar){
+      addDoc( collection(db, "direcciones"), {addres: 'hola' } )
+        .then(()=>{
+          console.log("added sucessfully")
+        })
+        .catch((e)=>{
+          console.log(e)
+        })
+    }
   }
 
   return (
@@ -184,7 +198,7 @@ function Maps() {
           // console.log("solo hay un resultado")
           <button
             onClick={() => {
-              
+              setAddress()
             }}
             key={Math.random()}
             className="d-flex justify-content-center align-items-center flex-column p-1 mx-2 my-2 mx-auto btn btn-primary col-12 col-sm-6 col-md-3 "

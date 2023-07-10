@@ -1,7 +1,7 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import storage from "../redux/contador";
 
-const apikey = "AIzaSyDU2V4MODTl1ivjUpFpwxd8o77DsuYh4Rw";
+const apikey = import.meta.env.VITE_google_api ;
 
 export const mapLoader = new Loader({
   apiKey: apikey,
