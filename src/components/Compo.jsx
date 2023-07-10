@@ -17,6 +17,7 @@ function Compo() {
   }
 
   // Add("user", { username: "benja" });
+  // Add("user", { username: "benja" });
 
   function fetchAlldocs(name) {
     getDocs(col(name)).then((results) => {
