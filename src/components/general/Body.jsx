@@ -32,10 +32,10 @@ function Body() {
             <h3>Nuestra Seleccion</h3>
 
             <div className="d-flex text-center ">
-          <figure className="" >
+          {/* <figure className="" > */}
             <img src="https:/picsum.photos/400" alt="" />
-            <figcaption>Comida</figcaption>
-          </figure>
+            {/* <figcaption>Comida</figcaption> */}
+          {/* </figure> */}
 
           <figure>
             <img src="https:/picsum.photos/400" alt="" />
