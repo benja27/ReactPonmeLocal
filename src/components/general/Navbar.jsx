@@ -1,25 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Await, useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/FireSetUp";
+import { db } from "../../firebase/FireSetUp";
+
 
 function Navbar() {
   const navigate = useNavigate();
   const [status, setStatus] = useState("");
   const [user, setUser] = useState([]);
+  const [aprovado, setAprovado] = useState("")
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user, "on aut");
+
+    let email;
+
+    auth.onAuthStateChanged( (user) => {
+      if (user) {      
+        // console.log("in")  
         setStatus("in");
         setUser(user);
+        email = user.email
+        // console.log(email,"email")
+
+        db.collection("localitos").doc(email).get()
+          .then( (result)=>{
+            
+            if(result){
+              // console.log(result)
+              let data =  result.data()
+              setAprovado(data.aprovado)
+            }else{
+              console.log("no existe")
+            }
+          })
+
       } else {
         console.log("no hay usuario logueado");
         setStatus("out");
       }
     });
   });
+
+
+
+
+
+
+
 
   return (
     <div className="navbar bg-dark text-white py-2">
@@ -46,14 +74,26 @@ function Navbar() {
             </button>
           )}
 
+
+
           <button
             onClick={() => {
               navigate("/newSeller");
             }}
             className="btn btn-light"
-          >
-            <p className="m-0">Vende con nosotros</p>
+          > 
+
+             {aprovado === "pending" ? (
+                <p className="m-0">Solicitud en proceso..</p>  
+             ) : (
+               <p className="m-0">Vende con nosotros</p>
+             ) } 
+            
+
           </button>
+
+
+
         </div>
 
         <div className="d-flex gap-2 align-items-center">

@@ -1,12 +1,56 @@
 import React from "react";
 import { useState } from "react";
+import { auth, db } from "../../firebase/FireSetUp";
+import { useNavigate } from "react-router-dom";
+import storage from "../../redux/contador";
+import Maps from "./Maps";
+
+
 
 function FormSellWithus() {
 
-  const [formulario, setFormulario] = useState([])
+  
+
+  const [form, setForm] = useState({aprovado: "pending"})
+  const navigate = useNavigate()
+  const {setSelected} = storage()
 
   function handleChange(e){
-    console.log(e)
+    setForm({
+      ...form,
+      [e.target.name] : e.target.value
+    })
+    console.log(form)
+  }
+  function handleChecked(e){
+    setForm({
+      ...form,
+      [e.target.name] : e.target.checked
+    })
+    console.log(form)
+  }
+
+  function handleSubmit(e){
+    e.preventDefault()
+    let email = auth.currentUser.email
+
+    db.collection("localitos").doc(email).set(form)
+    .then(()=>{
+      console.log("addded success")
+      navigate("/maps")
+          setSelected(form)
+    })
+
+
+    // db.collection("localitos").add(form)
+    //   .then((results)=>{
+    //     console.log("added sucessfully")
+
+    //   })
+    //   .catch(error=>{
+    //     console.log(error)
+    //   })
+    
   }
 
 
@@ -19,40 +63,49 @@ function FormSellWithus() {
 
         <h2 className="text-">New Seller INFO</h2>
 
-        <form className="d-flex flex-column gap-3" >
+        <form onSubmit={(e)=>{
+          handleSubmit(e)
+        }} className="d-flex flex-column gap-3" >
           <div className="">
             <label className="form-label">Nombre del Local</label>
             <input
               type="text"
               className="form-control"
-              name=""
+              name="nombre"
+              requiredd
               placeholder=""
+              // value=""
               onChange={(e)=>{
-                handleChange(e)
+                 handleChange(e)
               }}
             />
           </div>
 
           <div className="">
-            <label className="form-label">Tipo de Local</label>
-            <select className="form-select form-select-lg" name="" id="">
+            {/* <label className="form-label">Tipo de Local</label> */}
+            <select requiredd onChange={(e)=>{
+              handleChange(e)
+            }} className="form-select form-select-lg" name="classy" id="" defaultChecked>
               <option>Tipo de Local</option>
-              <option value="">Local</option>
-              <option value="">Puesto</option>
-              <option value="">Digital Kitchen</option>
-              <option value="">Restaurante</option>
-              <option value="">Fondita</option>
-              <option value="">Servicio</option>
-              <option value="">Food Truck</option>
-              <option value="">Mercado</option>
+              <option value="local">Local</option>
+              <option value="puesto">Puesto</option>
+              <option value="digital-kitchen">Digital Kitchen</option>
+              <option value="restaurante">Restaurante</option>
+              <option value="fondita">Fondita</option>
+              <option value="servicio">Servicio</option>
+              <option value="food-truck">Food Truck</option>
+              <option value="mercado">Mercado</option>
             </select>
           </div>
 
           <div className="">
-            <select className="form-select form-select-lg" name="" id="">
+            <select requiredd onChange={(e)=>{
+              handleChange(e)
+            }}
+             className="form-select form-select-lg" name="envio" id="">
               <option>Envio Comida</option>
-              <option value="">Si</option>
-              <option value="">No</option>
+              <option value="si">Si</option>
+              <option value="no">No</option>
             </select>
           </div>
 
@@ -61,58 +114,87 @@ function FormSellWithus() {
 
             <div className=" d-flex gap-4 justify-content-center">
               <label className="list-group-item">
-                <input
+                <input onChange={(e)=>{
+                   handleChecked(e) 
+                }}
                   className="form-check-input me-1"
                   type="checkbox"
                   value=""
+                  
+                  name="lunes"
                 />
                 Lunes
               </label>
               <label className="list-group-item">
                 <input
+                onChange={(e)=>{
+                  handleChecked(e) 
+               }}
                   className="form-check-input me-1"
                   type="checkbox"
                   value=""
+                  
+                  name="martes"
                 />
                 Martes
               </label>
               <label className="list-group-item">
-                <input
+                <input onChange={(e)=>{
+                   handleChecked(e) 
+                }}
                   className="form-check-input me-1"
                   type="checkbox"
                   value=""
+                  
+                  name="miercoles"
                 />
                 Miercoles
               </label>
               <label className="list-group-item">
-                <input
+                <input onChange={(e)=>{
+                   handleChecked(e) 
+                }}
                   className="form-check-input me-1"
                   type="checkbox"
                   value=""
+                  
+                  name="jueves"
                 />
                 Jueves
               </label>
               <label className="list-group-item">
-                <input
+                <input onChange={(e)=>{
+                   handleChecked(e) 
+                }}
                   className="form-check-input me-1"
                   type="checkbox"
                   value=""
+                  
+                  name="viernes"
                 />
                 Viernes
               </label>
               <label className="list-group-item">
-                <input
+                <input onChange={(e)=>{
+                   handleChecked(e) 
+                }}
                   className="form-check-input me-1"
                   type="checkbox"
                   value=""
+                  
+                  name="sabado"
                 />
                 Sabado
               </label>
               <label className="list-group-item">
-                <input
+                <input onChange={(e)=>{
+                   handleChecked(e) 
+                }}
                   className="form-check-input me-1"
                   type="checkbox"
                   value=""
+                  
+                  name="domingo"
                 />
                 Domingo
               </label>
@@ -124,20 +206,26 @@ function FormSellWithus() {
               <label htmlFor="" className="fs-5">
                 Abro a las ...
               </label>
-              <input
+              <input onChange={(e)=>{
+                  handleChange(e)
+              }}
                 type="time"
-                id="horaSeleccionada"
-                name="horaSeleccionada"
+                id=""
+                requiredd
+                name="abierto"
               />
             </div>
             <div className="d-flex flex-column col-3 gap-2">
               <label htmlFor="" className="fs-5">
                 Cierro a las ...
               </label>
-              <input
+              <input onChange={(e)=>{
+                handleChange(e)
+              }}
                 type="time"
-                id="horaSeleccionada"
-                name="horaSeleccionada"
+                id=""
+                requiredd
+                name="cerrado"
               />
             </div>
           </div>
@@ -145,30 +233,70 @@ function FormSellWithus() {
 
               <h5 className="text-center" >Direccion</h5>
           <div className="d-flex flex-wrap justify-content-center">
-            <input type="text" name="" id="" placeholder="Ciudad" />
-            <input type="text" name="" id="" placeholder="Delegacion" />
-            <input type="text" name="" id="" placeholder="Colonia" />
-            <input type="text" name="" id="" placeholder="Calle" />
-            <input type="text" name="" id="" placeholder="Numero" />
-            <input type="text" name="" id="" placeholder="Telefono" />
-            <input type="text" name="" id="" placeholder="Whatsapp" />
+            <input requiredd onChange={(e)=>{
+              handleChange(e)
+            }} type="text" name="ciudad" id="" placeholder="Ciudad" />
+            <input requiredd onChange={(e)=>{
+              handleChange(e)
+            }} type="text" name="delegacion" id="" placeholder="Delegacion" />
+            <input requiredd onChange={(e)=>{
+              handleChange(e)
+            }} type="text" name="colonia" id="" placeholder="Colonia" />
+            <input requiredd onChange={(e)=>{
+              handleChange(e)
+            }} type="text" name="calle" id="" placeholder="Calle" />
+            <input requiredd onChange={(e)=>{
+              handleChange(e)
+            }} type="text" name="numero" id="" placeholder="Numero" />
+            <input requiredd onChange={(e)=>{
+              handleChange(e)
+            }} type="text" name="telefono" id="" placeholder="Telefono" />
+            <input requiredd onChange={(e)=>{
+              handleChange(e)
+            }} type="text" name="whatsapp" id="" placeholder="Whatsapp" />
+            <input requiredd onChange={(e)=>{
+              handleChange(e)
+            }} type="text" name="copos" id="" placeholder="Codigo Postal" />
           </div>
 
           <div className="d-flex align-items-center gap-3 justify-content-center">
-            <input type="checkbox" name="" id="" />
+            <input requiredd type="checkbox" name="" id="" />
             <label htmlFor="">
               Acepto Los terminos y Condiciones de PonmeLocal para el uso de los
               datos que he proporcionado
             </label>
           </div>
 
+          <div className="d-flex">
+            <textarea requiredd className="mx-auto"  onChange={(e)=>{
+              handleChange(e)
+            }} name="palabrasClaves" id="" cols="50" rows="10" placeholder="Ingresa las palabras claves separadas por una coma"></textarea>
+          </div>
+
+
+
+
           <div className="d-flex pt-3">
-            <input
+            <input onClick={()=>{
+              
+            }}
               type="submit"
-              value="Enviar"
+              value="Siguente"
               className="btn btn-primary mx-auto"
             />
           </div>
+
+
+
+              
+
+
+
+
+
+
+
+
         </form>
       </div>
     </div>

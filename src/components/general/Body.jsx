@@ -1,9 +1,6 @@
 import React from "react";
 import imagen from "../../assets/400x400.jpg"
 
-console.log(imagen)
-
-
 function Body() {
   return (
     <div className="flex-grow-1" >

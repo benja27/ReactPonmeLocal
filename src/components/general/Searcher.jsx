@@ -22,7 +22,7 @@ function Searcher() {
           <h3>con o sin queso</h3>
             </div> 
           
-          <img src="https://picsum.photos/300" alt="" />
+          <img className="rounded"   src="https://picsum.photos/300" alt="" />
           
 
           

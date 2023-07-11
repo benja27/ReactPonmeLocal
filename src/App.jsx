@@ -18,7 +18,7 @@ function App() {
       <BrowserRouter>
         <Navbar></Navbar>
         <Routes>
-          <Route path="/maps" element={<Maps></Maps>}></Route>
+          <Route path="maps" element={<Maps></Maps>}></Route>
           <Route path="/login" element={<AuthBenja></AuthBenja>}></Route>
           <Route path="/" element={<Home></Home>}></Route>
           <Route
