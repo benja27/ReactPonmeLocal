@@ -2,8 +2,8 @@ import React from "react";
 
 function Body() {
   return (
-    <div>
-      <div className="container main-section">
+    <div className="flex-grow-1" >
+      <div className="container main-section flex-grow-1">
 
 
         {/* PRIMER PARTE */}

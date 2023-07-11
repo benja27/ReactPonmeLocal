@@ -13,7 +13,7 @@ function Home() {
 
 
   return (
-    <div>
+    <div className='flex-grow-1' >
       <Searcher></Searcher>
       <Body></Body>      
     </div>
