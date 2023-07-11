@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/FireSetUp";
+import { auth } from "../../firebase/FireSetUp";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ function Navbar() {
                 setUser([]);
                 auth.signOut();
               }}
-              className="btn btn-primary"
+              className="btn btn-danger"
             >
               Log out
             </button>
@@ -50,7 +50,7 @@ function Navbar() {
             onClick={() => {
               navigate("/newSeller");
             }}
-            className="btn btn-primary"
+            className="btn btn-light"
           >
             <p className="m-0">Vende con nosotros</p>
           </button>

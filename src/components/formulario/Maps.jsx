@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Mapas, mapLoader } from "../maps/mapsCofig";
-import storage from "../redux/contador";
-// import { db } from "../firebase/FireSetUp";
-import {  firestore } from "../firebase/FireSetUp"
+import { Mapas, mapLoader } from "../../maps/mapsCofig";
+import storage from "../../redux/contador";
 import { addDoc, collection } from "firebase/firestore";
 
 let mapas = new Mapas();

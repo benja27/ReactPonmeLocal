@@ -1,7 +1,7 @@
 import React from 'react'
-import Body from '../components/Body'
-import Footer from '../components/Footer'
-import Searcher from '../components/Searcher'
+import Body from '../components/general/Body'
+import Footer from '../components/general/Footer'
+import Searcher from '../components/general/Searcher'
 import storage from '../redux/contador'
 
 function Home() {
