@@ -1,4 +1,8 @@
 import React from "react";
+import imagen from "../../assets/400x400.jpg"
+
+console.log(imagen)
+
 
 function Body() {
   return (
@@ -9,16 +13,16 @@ function Body() {
         {/* PRIMER PARTE */}
         <div className="d-flex text-center ">
           <figure className="" >
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
 
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
         </div>
@@ -32,25 +36,25 @@ function Body() {
             <h3>Nuestra Seleccion</h3>
 
             <div className="d-flex text-center ">
-          {/* <figure className="" > */}
-            <img src="https:/picsum.photos/400" alt="" />
-            {/* <figcaption>Comida</figcaption> */}
-          {/* </figure> */}
+          <figure className="" >
+            <img src={imagen} alt="" />
+            <figcaption>Comida</figcaption>
+          </figure>
 
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
         </div>
@@ -67,44 +71,44 @@ function Body() {
 
             <div className="d-flex text-center ">
           <figure className="" >
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
 
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
           <figure>
-            <img src="https:/picsum.photos/400" alt="" />
+            <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
           </figure>
         </div>

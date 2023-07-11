@@ -21,11 +21,11 @@ function Searcher() {
           <h3>!Las mejores Quesadillas Fritas en Ponme Local!</h3>
           <h3>con o sin queso</h3>
             </div> 
-          <figure>
+          
           <img src="https://picsum.photos/300" alt="" />
-          <figcaption>holi</figcaption>
+          
 
-          </figure>
+          
         </div>
       </div>
     </div>
