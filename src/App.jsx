@@ -9,6 +9,7 @@ import AuthBenja from "./components/auth/AuthBenja";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./conjuntos/Home";
 import FormSellWithus from "./components/formulario/FormSellWithus";
+import Admin from "./components/auth/Admin";
 
 import "./App.css";
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="maps" element={<Maps></Maps>}></Route>
           <Route path="/login" element={<AuthBenja></AuthBenja>}></Route>
           <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/admin" element={ <Admin></Admin> }></Route>
           <Route
             path="/newSeller"
             element={
