@@ -7,20 +7,18 @@ const newArray = [];
 function Admin() {
   const { results, saveResults } = storage();
   const [status, setStatus] = useState(0);
-  const [busqueda, setBusqueda] = useState([])
+  const [busqueda, setBusqueda] = useState([]);
 
-  useEffect(()=>{
-    if(localStorage.getItem("localitos")){
-      console.log("local storage detected")
-      let data = JSON.parse(localStorage.getItem( "localitos" ))
+  useEffect(() => {
+    if (localStorage.getItem("localitos")) {
+      console.log("local storage detected");
+      let data = JSON.parse(localStorage.getItem("localitos"));
       // console.log(data)
-      saveResults(data)
-      console.log("local storaged")
-      setStatus(1)
+      saveResults(data);
+      // console.log("local storaged");
+      setStatus(1);
     }
-  },[])
-
-
+  }, []);
 
   async function fetchDb() {
     await db
@@ -38,7 +36,7 @@ function Admin() {
 
           // console.log(newArray);
           saveResults(newArray);
-          localStorage.setItem("localitos", JSON.stringify(newArray))
+          localStorage.setItem("localitos", JSON.stringify(newArray));
         } else {
           console.log("esa collection no existe");
         }
@@ -54,64 +52,199 @@ function Admin() {
     if (e.target.user.value === "admin" && e.target.password.value === "123") {
       alert("Welcome");
       fetchDb();
-      setStatus(1);      
+      setStatus(1);
     } else {
       alert("incorrect");
     }
   }
 
-  function handleSearch(e ){
-    e.preventDefault()
-    console.log(e)
-    let name = e.target.searchIt.value
-    console.log(name)
-    let filtered = results.filter((ele)=> {
-      // console.log(ele.nombre)
-      if(ele.nombre === name){
-        return true
-      }
-      return false
+  function handleSearch(e) {
+    setStatus(2);
+    console.log("starting handle search");
+    
+    //  e.target.value === ""
+    
+    if (e.target.value === "") {
+      setStatus(1);
+    }
+
+    let filtered;
+
+    // ================ input es un numero
+    if (parseInt(e.target.value)) {
+
       
+      console.log("number");
+      let num = parseInt(e.target.value) ;
+      
+      filtered = results.filter((ele) => {
+        
 
-    })
-    console.log(filtered)
+        if(ele.telefono === undefined){
+          console.log("no hay telefono")
+        }else{
+          let target = (ele.telefono).replaceAll(" ","")
+          console.log(typeof target2)
+          
+          console.log(ele);
+          if ( target.includes(num) ) {
+            return true;
+          }
+          return false;
+        }
+
+      });
+    } else {        // input es un string
+      let name = e.target.value;
+
+      if (e.target.value === "") {
+        setStatus(1);
+      }
+
+      console.log(name);
+
+      // =======
+      filtered = results.filter((ele) => {
+        // console.log(ele);
+        if (
+          ele.nombre &&
+          name &&
+          ele.nombre.toLowerCase().includes(name.toLowerCase())
+        ) {
+          return true;
+        }
+
+        return false;
+      });
+    }
+
+    // =========
+
+    if (filtered.length > 0) {
+      setBusqueda(filtered);
+      setStatus(2);
+    } else {
+      console.log(e.target.value)
+      if (e.target.value === "") {
+        setStatus(1);
+      }else{
+        console.log("else")
+        setBusqueda([]);
+        setStatus(2);
+      }
 
 
+    }
   }
 
+  // ================== status 2 ==== buscando
 
-  // ================== status 1 ==== logueado
-
-  if (status === 1) {
+  if (status === 2) {
+    console.log("entrando status 2");
     return (
       <div className="flex-grow-1">
         <div className="container pt-5">
           <div>
             <div>
-              <form onSubmit={(e)=>{
-                handleSearch(e)
-              }} >
+              <form
+              // onSubmit={(e)=>{
+              //   handleSearch(e)
+              // }}
+              >
                 <div className="d-flex">
-                <input                  
-                  className="form-control"
-                  type="text"
-                  name="searchIt"                  
-                  placeholder="Buscar"
-                />
-                <input className="btn btn-dark" type="submit" value="Buscar" />
-                <select name="" id="" className="btn btn-dark" >                  
-                  <option value="">Nombre</option>
-                  <option value="">telefono</option>                  
-                </select>
-
+                  <input
+                    onChange={(e) => {
+                      handleSearch(e);
+                    }}
+                    className="form-control"
+                    type="text"
+                    name="searchIt"
+                    placeholder="Buscar"
+                  />
+                  <input
+                    className="btn btn-dark"
+                    type="submit"
+                    value="Buscar"
+                  />
+                  <select name="filtro" id="filtro" className="btn btn-dark">
+                    <option value="nombre">Nombre</option>
+                    <option value="telefono">telefono</option>
+                  </select>
                 </div>
               </form>
             </div>
 
-            <h3>total de registros:  </h3>
+            <h3>total de resultados: {busqueda.length} </h3>
+            <div>
+              {busqueda.length > 0 ? (
+                busqueda.map((ele) => (
+                  <div
+                    className="bg-dark rounded text-white py-2 px-2 my-2"
+                    key={Math.random()}
+                  >
+                    <h5>id: {ele.id}</h5>
+                    <h5>nombre: {ele.nombre}</h5>
+                  </div>
+                ))
+              ) : (
+                <div
+                  className="bg-dark rounded text-white py-2 px-2 my-2"
+                  key={Math.random()}
+                >
+                  <h5>Sin resultados {busqueda.length} </h5>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ================== status 1 ==== logueado
+
+  if (status === 1) {
+    console.log("entrado status 1");
+    return (
+      <div className="flex-grow-1">
+        <div className="container pt-5">
+          <div>
+            <div className="">
+              <form
+                onSubmit={(e) => {
+                  handleSearch(e);
+                }}
+              >
+                <div className="d-flex">
+                  <input
+                    onChange={(e) => {
+                      handleSearch(e);
+                    }}
+                    className="form-control"
+                    type="text"
+                    name="searchIt"
+                    placeholder="Buscar"
+                  />
+                  <input
+                    className="btn btn-dark"
+                    type="submit"
+                    value="Buscar"
+                  />
+                  <select name="" id="" className="btn btn-dark">
+                    <option value="">Nombre</option>
+                    <option value="">telefono</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+
+            <h3>total de registros: {results.length} </h3>
             <div>
               {results.map((ele) => (
-                <div className="bg-dark rounded text-white py-2 px-2 my-2" key={Math.random()} >
+                <div
+                  className="bg-dark rounded text-white py-2 px-2 my-2"
+                  key={Math.random()}
+                >
                   <h5>id: {ele.id}</h5>
                   <h5>nombre: {ele.nombre}</h5>
                 </div>
@@ -123,8 +256,8 @@ function Admin() {
     );
   }
 
-
   // estatus ========== 0 ==== No logueado
+  console.log("entrado status 0");
   return (
     <div className="flex-grow-1">
       <div className="container pt-4">
@@ -142,14 +275,14 @@ function Admin() {
                 <input
                   type="text"
                   className="form-control"
-                  name="user"                  
+                  name="user"
                   placeholder="user"
                 />
 
                 <input
                   type="password"
                   name="password"
-                  className="form-control"                  
+                  className="form-control"
                   placeholder="password"
                 />
 

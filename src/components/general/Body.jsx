@@ -66,7 +66,7 @@ function Body() {
         <div>
             <h3>Nuestra Seleccion</h3>
 
-            <div className="d-flex text-center ">
+            <div className="d-flex text-center row">
           <figure className="" >
             <img src={imagen} alt="" />
             <figcaption>Comida</figcaption>
