@@ -92,7 +92,12 @@ function Navbar() {
 
           </button>
 
-
+            
+            <button onClick={()=>{
+              navigate("/admin")
+            }} className="btn btn-primary">
+              Admin
+            </button>
 
         </div>
 
