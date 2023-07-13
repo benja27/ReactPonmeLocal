@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { auth, db } from "../../firebase/FireSetUp";
 import { useNavigate } from "react-router-dom";
@@ -7,8 +7,20 @@ import Maps from "./Maps";
 
 
 
+
 function FormSellWithus() {
 
+
+
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+        console.log("hay un user logueado")
+      }else{
+        navigate("/login")  
+      }
+    })
+  },[])
   
 
   const [form, setForm] = useState({aprovado: "pending"})
@@ -72,7 +84,8 @@ function FormSellWithus() {
               type="text"
               className="form-control"
               name="nombre"
-              requiredd
+              required
+              
               placeholder=""
               // value=""
               onChange={(e)=>{
@@ -83,7 +96,7 @@ function FormSellWithus() {
 
           <div className="">
             {/* <label className="form-label">Tipo de Local</label> */}
-            <select requiredd onChange={(e)=>{
+            <select required onChange={(e)=>{
               handleChange(e)
             }} className="form-select form-select-lg" name="classy" id="" defaultChecked>
               <option>Tipo de Local</option>
@@ -99,7 +112,7 @@ function FormSellWithus() {
           </div>
 
           <div className="">
-            <select requiredd onChange={(e)=>{
+            <select required onChange={(e)=>{
               handleChange(e)
             }}
              className="form-select form-select-lg" name="envio" id="">
@@ -211,7 +224,7 @@ function FormSellWithus() {
               }}
                 type="time"
                 id=""
-                requiredd
+                required
                 name="abierto"
               />
             </div>
@@ -224,7 +237,7 @@ function FormSellWithus() {
               }}
                 type="time"
                 id=""
-                requiredd
+                required
                 name="cerrado"
               />
             </div>
@@ -233,34 +246,34 @@ function FormSellWithus() {
 
               <h5 className="text-center" >Direccion</h5>
           <div className="d-flex flex-wrap justify-content-center">
-            <input requiredd onChange={(e)=>{
+            <input required onChange={(e)=>{
               handleChange(e)
             }} type="text" name="ciudad" id="" placeholder="Ciudad" />
-            <input requiredd onChange={(e)=>{
+            <input required onChange={(e)=>{
               handleChange(e)
             }} type="text" name="delegacion" id="" placeholder="Delegacion" />
-            <input requiredd onChange={(e)=>{
+            <input required onChange={(e)=>{
               handleChange(e)
             }} type="text" name="colonia" id="" placeholder="Colonia" />
-            <input requiredd onChange={(e)=>{
+            <input required onChange={(e)=>{
               handleChange(e)
             }} type="text" name="calle" id="" placeholder="Calle" />
-            <input requiredd onChange={(e)=>{
+            <input required onChange={(e)=>{
               handleChange(e)
             }} type="text" name="numero" id="" placeholder="Numero" />
-            <input requiredd onChange={(e)=>{
+            <input required onChange={(e)=>{
               handleChange(e)
             }} type="text" name="telefono" id="" placeholder="Telefono" />
-            <input requiredd onChange={(e)=>{
+            <input required onChange={(e)=>{
               handleChange(e)
             }} type="text" name="whatsapp" id="" placeholder="Whatsapp" />
-            <input requiredd onChange={(e)=>{
+            <input required onChange={(e)=>{
               handleChange(e)
             }} type="text" name="copos" id="" placeholder="Codigo Postal" />
           </div>
 
           <div className="d-flex align-items-center gap-3 justify-content-center">
-            <input requiredd type="checkbox" name="" id="" />
+            <input required type="checkbox" name="" id="" />
             <label htmlFor="">
               Acepto Los terminos y Condiciones de PonmeLocal para el uso de los
               datos que he proporcionado
@@ -268,7 +281,7 @@ function FormSellWithus() {
           </div>
 
           <div className="d-flex">
-            <textarea requiredd className="mx-auto"  onChange={(e)=>{
+            <textarea required className="mx-auto"  onChange={(e)=>{
               handleChange(e)
             }} name="palabrasClaves" id="" cols="50" rows="10" placeholder="Ingresa las palabras claves separadas por una coma"></textarea>
           </div>

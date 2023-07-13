@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { onAuthStateChanged } from "@firebase/auth";
+import { useNavigate } from "react-router";
 
 
 function FormSellWithus() {
+  const navigate = useNavigate()
 
-  
+  const [currentUser, setUser] = useState([])
+
+  useEffect(()=>{
+    onAuthStateChanged((user)=>{
+      if(user){
+        setUser(user)
+        console.log("user logueado")
+      }else{
+        alert("Registrate antes para iniciar el proceso")
+        navigate("/login")
+      }
+    })
+  },[])
 
 
 

@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase/FireSetUp";
+import VanillaTilt from "vanilla-tilt";
+import ItemSearch from "./ItemSearch";
+import Test from "./test";
 
 function Searcher() {
-
+  const tilref = useRef()
   const navigate = useNavigate();
   const [results, setresults] = useState([]);
   const [busqueda, setBusqueda] = useState([]);
   const [state, setstate] = useState(0);
   const [ubi, setUbi] = useState([]);
   let filtered;
+
+  useEffect(()=>{
+    VanillaTilt.init(tilref.current)
+  },[state])
+
 
   useEffect(() => {    
     if (localStorage.getItem("localitos")) {
@@ -64,7 +72,18 @@ function Searcher() {
     console.log("Error al obtener la ubicación: " + error.message);
   }
 
+  // if(state ===  0){
+  //   return (
+  //     <div>
+  //       <Test></Test>
+  //       <Test></Test>
+  //       <Test></Test>
+  //       <Test></Test>
+  //       <Test></Test>
 
+  //     </div>
+  //   )
+  // }
 
   // checa si ya se registro la ubicacion
   // useEffect(()=>{
@@ -229,18 +248,16 @@ function Searcher() {
   
   function degToRad(deg) {
     return deg * (Math.PI / 180);
-  }
-  
-
+  }  
 
   return (
     <div className="pb-3">
-      <div className="container">
-        <div className="d-flex justify-content-between py-3 ">
-          <h3 className="">Ponme Local</h3>
+      <div className="container ">
+        <div className="d-flex justify-content-between py-3 align-items-center ">
+          <h6 className="d-flex">Ponme Local</h6>
 
           <form
-            className="col-8 d-flex "
+            className="col-9 d-flex "
             onSubmit={(e) => {
               handleSubmit(e);
             }}
@@ -265,13 +282,17 @@ function Searcher() {
 
         {console.log("entrado estado 0")}
         {state === 0 ? (
-          <div className="d-flex align-items-center justify-content-between gap-5 flex-wrap">
-            <div className="col-12" >
+          <div className="d-flex align-items-center justify-content-between flex-wrap">
+
+            <div className="col-12 col-sm-6 text-center" >
               <h3>!Las mejores Quesadillas Fritas en Ponme Local!</h3>
               <h3>con o sin queso</h3>
             </div>
 
-            <img className="rounded mx-auto" src="https://picsum.photos/300" alt="" />
+            <div className="col-12 col-sm-6 d-flex py-2" >
+              <img className="rounded mx-auto" src="https://picsum.photos/300" alt="" style={{maxWidth:"230px"}} />
+            </div>
+
           </div>
         ) : ( "" )}
 
@@ -279,20 +300,26 @@ function Searcher() {
 
           {console.log("entrando estado 1")}
         {state === 1 ? (
-            <div className="row rounded px-3 py-3 check d-flex justify-content-center">
+            <div  className="row rounded px-3 py-3 d-flex justify-content-center">
+
             {busqueda.map((ele) => (
-              <div key={Math.random()} className="px-2 py-2 mb-3    col-10 col-sm-6 col-md-4 d-flex">
-                <div className="card py-3 w-100 bg-dar d-flex text-center bg-dark text-white">
-                  <h6 className="flex-grow-1 d-flex align-items-center justify-content-center" >{ele.nombre}</h6>
-                  <h6>A {ele.distance} KM de tu Ubicacion</h6>
-                  <h6 className="flex-grow-1 d-flex align-items-center justify-content-center" >
-                    {" "}
-                    {ele.calle} {ele.numedi} {ele.colonia} {ele.ciudad}{" "} 
-                  </h6>
-                  <h6 className="flex-grow-1 d-flex align-items-center justify-content-center" >{ele.palclaves}</h6>
-                </div>
-              </div>
+
+                <ItemSearch key={Math.random()} ele={ele} ></ItemSearch>
+              // <div key={Math.random()}  className="px-2 py-2 mb-3    col-10 col-sm-6 col-md-4 d-flex">
+              //   <div className="card py-3 w-100 bg-dar d-flex text-center bg-dark text-white">
+              //     <h6 className="flex-grow-1 d-flex align-items-center justify-content-center" >{ele.nombre}</h6>
+              //     <h6 className="" >A   <span className="bg-primary rounded px-1"> {ele.distance}</span>  KM de tu Ubicacion</h6>
+              //     <h6> <a title="Send a Whatsapp msg" href={`https://api.whatsapp.com/send?phone=${ (ele.telefono).replaceAll(" ","")  }`}> {ele.telefono}</a>   </h6>
+              //     <h6 className="flex-grow-1 d-flex align-items-center justify-content-center" >
+              //       {" "}
+              //       {ele.calle} {ele.numedi} {ele.colonia} {ele.ciudad}{" "} 
+              //     </h6>
+              //     <h6 className="flex-grow-1 d-flex align-items-center justify-content-center" >{ele.palclaves}</h6>
+              //   </div>
+              // </div>
+
             ))}
+
           </div>
         ) : (
           ""

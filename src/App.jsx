@@ -2,14 +2,12 @@
 import Maps from "./components/formulario/Maps";
 import Navbar from "./components/general/Navbar";
 import Form2 from "./components/formulario/Form2";
-
 import Footer from "./components/general/Footer";
-
 import AuthBenja from "./components/auth/AuthBenja";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./conjuntos/Home";
-import FormSellWithus from "./components/formulario/FormSellWithus";
 import Admin from "./components/auth/Admin";
+import Test from "./components/general/test";
 
 import "./App.css";
 
@@ -17,7 +15,8 @@ function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <BrowserRouter>
-        <Navbar></Navbar>
+        <Navbar></Navbar>        
+        {/* <Test></Test> */}
         <Routes>
           <Route path="maps" element={<Maps></Maps>}></Route>
           <Route path="/login" element={<AuthBenja></AuthBenja>}></Route>

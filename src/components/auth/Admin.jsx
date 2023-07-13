@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
 import storage from "../../redux/contador";
 import { db } from "../../firebase/FireSetUp";
+import { useNavigate } from "react-router";
 
 const newArray = [];
 
 function Admin() {
   const { results, saveResults } = storage();
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState(3);
   const [busqueda, setBusqueda] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (localStorage.getItem("localitos")) {
+    console.log("useefect del inicio");
+    if (localStorage.getItem("admin")) {
       console.log("local storage detected");
+
       let data = JSON.parse(localStorage.getItem("localitos"));
       // console.log(data)
       saveResults(data);
       // console.log("local storaged");
       setStatus(1);
+    } else {
+      console.log("entrando else");
+      setStatus(3);
+      console.log(status);
     }
   }, []);
 
@@ -36,7 +45,7 @@ function Admin() {
 
           // console.log(newArray);
           saveResults(newArray);
-          localStorage.setItem("localitos", JSON.stringify(newArray));
+          localStorage.setItem("admin", JSON.stringify(newArray));
         } else {
           console.log("esa collection no existe");
         }
@@ -61,9 +70,9 @@ function Admin() {
   function handleSearch(e) {
     setStatus(2);
     console.log("starting handle search");
-    
+
     //  e.target.value === ""
-    
+
     if (e.target.value === "") {
       setStatus(1);
     }
@@ -72,29 +81,25 @@ function Admin() {
 
     // ================ input es un numero
     if (parseInt(e.target.value)) {
-
-      
       console.log("number");
-      let num = parseInt(e.target.value) ;
-      
-      filtered = results.filter((ele) => {
-        
+      let num = parseInt(e.target.value);
 
-        if(ele.telefono === undefined){
-          console.log("no hay telefono")
-        }else{
-          let target = (ele.telefono).replaceAll(" ","")
-          console.log(typeof target2)
-          
+      filtered = results.filter((ele) => {
+        if (ele.telefono === undefined) {
+          console.log("no hay telefono");
+        } else {
+          let target = ele.telefono.replaceAll(" ", "");
+          console.log(typeof target2);
+
           console.log(ele);
-          if ( target.includes(num) ) {
+          if (target.includes(num)) {
             return true;
           }
           return false;
         }
-
       });
-    } else {        // input es un string
+    } else {
+      // input es un string
       let name = e.target.value;
 
       if (e.target.value === "") {
@@ -124,16 +129,14 @@ function Admin() {
       setBusqueda(filtered);
       setStatus(2);
     } else {
-      console.log(e.target.value)
+      console.log(e.target.value);
       if (e.target.value === "") {
         setStatus(1);
-      }else{
-        console.log("else")
+      } else {
+        console.log("else");
         setBusqueda([]);
         setStatus(2);
       }
-
-
     }
   }
 
@@ -143,6 +146,7 @@ function Admin() {
     console.log("entrando status 2");
     return (
       <div className="flex-grow-1">
+        <button>hola</button>
         <div className="container pt-5">
           <div>
             <div>
@@ -208,6 +212,15 @@ function Admin() {
     return (
       <div className="flex-grow-1">
         <div className="container pt-5">
+          <button
+            onClick={() => {
+              localStorage.removeItem("admin");
+              navigate("/");
+            }}
+            className="btn btn-danger ms-auto"
+          >
+            Cerrar Admin
+          </button>
           <div>
             <div className="">
               <form
@@ -258,47 +271,50 @@ function Admin() {
 
   // estatus ========== 0 ==== No logueado
   console.log("entrado status 0");
-  return (
-    <div className="flex-grow-1">
-      <div className="container pt-4">
-        <div className="row">
-          <div className="col-10 bg-dark text-white rounded mx-auto">
-            <form
-              onSubmit={(e) => {
-                handleSubmit(e);
-              }}
-              className="py-5"
-            >
-              <h2 className="text-center pb-4"> Ingreso de Admin</h2>
 
-              <div className="d-flex flex-column gap-4">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="user"
-                  placeholder="user"
-                />
+  if (status === 3) {
+    return (
+      <div className="flex-grow-1">
+        <div className="container pt-4">
+          <div className="row">
+            <div className="col-10 bg-dark text-white rounded mx-auto">
+              <form
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+                className="py-5"
+              >
+                <h2 className="text-center pb-4"> Ingreso de Admin</h2>
 
-                <input
-                  type="password"
-                  name="password"
-                  className="form-control"
-                  placeholder="password"
-                />
+                <div className="d-flex flex-column gap-4">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="user"
+                    placeholder="user"
+                  />
 
-                <input
-                  className="btn btn-light"
-                  type="submit"
-                  value="ingresar"
-                />
-              </div>
-            </form>
+                  <input
+                    type="password"
+                    name="password"
+                    className="form-control"
+                    placeholder="password"
+                  />
+
+                  <input
+                    className="btn btn-light"
+                    type="submit"
+                    value="ingresar"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-  // =================================
+    );
+  }
+  
 }
 
 export default Admin;
