@@ -69,6 +69,7 @@ function Searcher() {
   }
   
   function errorCallback(error) {
+    alert("no se usara la ubicacion")
     console.log("Error al obtener la ubicación: " + error.message);
   }
 
