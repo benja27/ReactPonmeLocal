@@ -7,6 +7,10 @@ function Test() {
 
   useEffect(()=>{
     VanillaTilt.init(miref.current)
+    navigator.geolocation.getCurrentPosition((ele)=>{
+      console.log("quieres activar la geocalizacion?")
+      
+    })
   },[])
 
   return (

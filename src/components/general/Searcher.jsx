@@ -14,9 +14,17 @@ function Searcher() {
   const [ubi, setUbi] = useState([]);
   let filtered;
 
-  useEffect(()=>{
-    VanillaTilt.init(tilref.current)
-  },[state])
+  // useEffect(()=>{
+  //   VanillaTilt.init(tilref.current)
+  // },[state])
+
+
+  // if(state === 0){
+  //   return(
+  //     <Test></Test>
+  //   )
+  // }
+
 
 
   useEffect(() => {    
@@ -73,21 +81,6 @@ function Searcher() {
     console.log("Error al obtener la ubicación: " + error.message);
   }
 
-  // if(state ===  0){
-  //   return (
-  //     <div>
-  //       <Test></Test>
-  //       <Test></Test>
-  //       <Test></Test>
-  //       <Test></Test>
-  //       <Test></Test>
-
-  //     </div>
-  //   )
-  // }
-
-  // checa si ya se registro la ubicacion
-  // useEffect(()=>{
 
     if(ubi.length === 0){
       console.log("ubicacion no encontrada")
@@ -136,10 +129,12 @@ function Searcher() {
         console.log("filteres tiene mas dd 1 elemento");
         setstate(1);
 
-        // we are working here
-          // setBusqueda(filtered);
-        // we are working here
-        filterDistance(filtered)
+       if(ubi.length === 0){
+        setBusqueda(filtered)
+        setstate(1)
+       }else(
+         filterDistance(filtered)
+       )
 
 
 
