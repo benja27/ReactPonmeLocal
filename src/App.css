@@ -19,3 +19,37 @@
   width: 100%;
   border-radius: 15px;
 }
+
+img{
+  width: 100%;
+  height: auto;
+}
+
+figure{
+  object-fit: cover; 
+  
+}
+
+.conti > figure > img{
+    height: 80px;
+    width: auto;
+}
+
+.third-section {
+  display: grid;
+  /* background-color: red; */
+  /* grid-template-columns: repeat(auto-fit, minmax(1fr, 200px)); */
+  grid-template-columns: repeat( auto-fit,minmax( min(350px, 100%) ,1fr) );
+
+}
+
+.third-section figure{
+  /* background-color: black;   */
+  /* color: white; */
+}
+
+.third-section * img{
+  width: 100%;
+  height: 90% ;
+  object-fit: cover;
+}

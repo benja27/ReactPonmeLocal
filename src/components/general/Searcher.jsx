@@ -157,7 +157,7 @@ function Searcher() {
           setstate(0);
         } else {
           console.log("mandando el estado 2");
-          setstate(2);
+          setstate(3);
         }
       }
       // console.log(filtered);
@@ -196,8 +196,7 @@ function Searcher() {
       }
     });
 
-    // console.log(filteredDistance, "dentro del area")
-    // withINdistance.push(filterDistance)
+    
     console.log(withINdistance, "with in distance");
 
     if (withINdistance.length > 0) {
@@ -251,37 +250,37 @@ function Searcher() {
   return (
     <div className="pb-3">
       <div className="container ">
-        <div className="d-flex justify-content-between py-3 align-items-center ">
-          <button
-            onClick={(e) => {
-              toogleUbi(e);
-            }}
-            className="btn btn-dark"
-          >
-            Ubicacion
-          </button>
+        <div className="d-flex flex-wrap justify-content-between py-3 align-items-center">
+          
+          <div className="bg-primar d-flex flex-wrap col-12 col-sm-6 flex-colum -100" >
+            
+            {ubistatus === true ? (
+              <button
+              onClick={(e) => {
+                toogleUbi(e);
+              }}
+              className="btn btn-dark col-12 col-sm-5"
+            >
+              Ubicacion is On
+            </button>
+            ):(
+              <button
+              onClick={(e) => {
+                toogleUbi(e);
+              }}
+              className="btn btn-dark col-12 col-sm-5"
+            >
+              Ubicacion is Off
+            </button>
+            )}
 
-          <form
-            className="col-9 d-flex "
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            <div className="flex-grow-1 d-flex flex-column" >
-              <input
-                type="text"
-                id="item"
-                name="toSearch"
-                className="text-center form-control flex-grow-1"
-                placeholder="Busca lo que nesecites"
-              />
-              <input className="btn btn-dark" type="submit" value="enviar" />
-            </div>
+            
+
             <select
               name=""
               id="radio"
-              className="btn btn-light"
-              style={{ width: "140px" }}
+              className="btn btn-light col-12 col-sm-7"
+              // style={{ width: "140px" }}
               defaultValue={"1000"}
             >
               <option value="1000">Distancia</option>
@@ -291,12 +290,29 @@ function Searcher() {
               <option value="25">25 KM</option>
               <option value="1000">Todos</option>
             </select>
-          </form>
-        </div>
 
-        <div>
-          <h5 ref={debug}>hola</h5>
+          </div>
+
+          <form
+            className="col-12 col-sm-6  d-flex bg-dar  chec"
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <div className="flex-grow-1 d-flex flex-column">
+              <input
+                type="text"
+                id="item"
+                name="toSearch"
+                className="text-center form-control flex-grow-1"
+                placeholder="Busca lo que nesecites"
+              />
+              {/* <input className="btn btn-dar" type="submit" value="enviar" /> */}
+            </div>
+          </form>
+
         </div>
+        
 
         {console.log("entrado estado 0")}
         {state === 0 ? (
@@ -309,7 +325,7 @@ function Searcher() {
             <div className="col-12 col-sm-6 d-flex py-2">
               <img
                 className="rounded mx-auto"
-                src="https://picsum.photos/300"
+                src="https://tipsparatuviaje.com/wp-content/uploads/2018/09/enchiladas-comida-mexicana-1152x768.jpg"
                 alt=""
                 style={{ maxWidth: "230px" }}
               />
