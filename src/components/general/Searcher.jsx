@@ -13,39 +13,36 @@ function Searcher() {
   const [busqueda, setBusqueda] = useState([]);
   const [state, setstate] = useState(0);
   const [ubi, setUbi] = useState([]);
-  const [ ubistatus, setubistatus ] = useState(false);
+  const [ubistatus, setubistatus] = useState(false);
   let filtered;
 
-  
-  console.log(ubistatus)
+  console.log(ubistatus);
 
   let userLat;
   let userLng;
-  function toogleUbi(e){
-    console.log(ubistatus)
-    setubistatus(!ubistatus)
-    console.log("preguntando por ubi")
+  function toogleUbi(e) {
+    console.log(ubistatus);
+    setubistatus(!ubistatus);
+    console.log("preguntando por ubi");
     navigator.geolocation.getCurrentPosition(
-      (position)=>{
-        if(position){
-          console.log("a wiwi")
-          setubistatus(true)
-          console.log(ubistatus)
-          userLat = position.coords.latitude
-          userLng = position.coords.longitude
-          console.log(userLat)
-          setUbi([userLat, userLng])
-        }else(
-          console.log("no wiwi")
-        )
-
-    },(error)=>{
-      console.log("hubo un error ", error)      
-    } )
+      (position) => {
+        if (position) {
+          console.log("a wiwi");
+          setubistatus(true);
+          console.log(ubistatus);
+          userLat = position.coords.latitude;
+          userLng = position.coords.longitude;
+          console.log(userLat);
+          setUbi([userLat, userLng]);
+        } else console.log("no wiwi");
+      },
+      (error) => {
+        console.log("hubo un error ", error);
+      }
+    );
   }
 
-  console.log(ubi)
-  
+  console.log(ubi);
 
   useEffect(() => {
     if (localStorage.getItem("localitos")) {
@@ -115,7 +112,7 @@ function Searcher() {
     e.preventDefault();
     // let radio =   (document.getElementById("radio").value)
     // console.log(radio,"radio")
-    console.log(userLat,"ubiiiiiiiiiiiiiiiiiii")
+    console.log(userLat, "ubiiiiiiiiiiiiiiiiiii");
 
     // if(ubistatus === true){
     //   userLat = ubi[0]
@@ -153,7 +150,7 @@ function Searcher() {
           setstate(1);
         } else {
           filterDistance(filtered);
-        } 
+        }
       } else {
         if (e.target.value === "") {
           console.log("e value esta vacio");
@@ -181,7 +178,7 @@ function Searcher() {
     let filteredDistance = filtered.filter((ele) => {
       let Elelat = ele.lat;
       let Elelng = ele.lng;
-      console.log(userlat, userlng)
+      console.log(userlat, userlng);
       const distance = parseInt(
         calcularDistancia(userlat, userlng, Elelat, Elelng).toFixed(1)
       );
@@ -255,12 +252,13 @@ function Searcher() {
     <div className="pb-3">
       <div className="container ">
         <div className="d-flex justify-content-between py-3 align-items-center ">
-          <button onClick={(e) => {
-            toogleUbi(e)
-          }} className="btn btn-dark">
-
+          <button
+            onClick={(e) => {
+              toogleUbi(e);
+            }}
+            className="btn btn-dark"
+          >
             Ubicacion
-
           </button>
 
           <form
@@ -269,13 +267,16 @@ function Searcher() {
               handleSubmit(e);
             }}
           >
-            <input
-              type="text"
-              id="item"
-              name="toSearch"
-              className="text-center form-control flex-grow-1"
-              placeholder="Busca lo que nesecites"
-            />
+            <div className="flex-grow-1 d-flex flex-column" >
+              <input
+                type="text"
+                id="item"
+                name="toSearch"
+                className="text-center form-control flex-grow-1"
+                placeholder="Busca lo que nesecites"
+              />
+              <input className="btn btn-dark" type="submit" value="enviar" />
+            </div>
             <select
               name=""
               id="radio"
