@@ -8,7 +8,7 @@ import Card from "./components/card";
 function App() {
   return (
     <div className="">
-      
+      <Ecard3d></Ecard3d>
     </div>
   );
 }
