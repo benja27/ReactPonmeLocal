@@ -39,7 +39,7 @@ figure{
   display: grid;
   /* background-color: red; */
   /* grid-template-columns: repeat(auto-fit, minmax(1fr, 200px)); */
-  grid-template-columns: repeat( auto-fit,minmax( min(350px, 100%) ,1fr) );
+  grid-template-columns: repeat( auto-fit,minmax( min(150px, 100%) ,1fr) );
 
 }
 

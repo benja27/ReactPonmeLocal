@@ -14,7 +14,13 @@ function Searcher() {
   const [state, setstate] = useState(0);
   const [ubi, setUbi] = useState([]);
   const [ubistatus, setubistatus] = useState(false);
+  const tilt = useRef()
   let filtered;
+
+
+  useEffect(()=>{
+    VanillaTilt.init(tilt.current)
+  })
 
   console.log(ubistatus);
 
@@ -322,7 +328,7 @@ function Searcher() {
               <h3>con o sin queso</h3>
             </div>
 
-            <div className="col-12 col-sm-6 d-flex py-2">
+            <div className="col-12 col-sm-6 d-flex py-2" ref={tilt}>
               <img
                 className="rounded mx-auto"
                 src="https://tipsparatuviaje.com/wp-content/uploads/2018/09/enchiladas-comida-mexicana-1152x768.jpg"
