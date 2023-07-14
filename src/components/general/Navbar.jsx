@@ -3,12 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/FireSetUp";
 import { db } from "../../firebase/FireSetUp";
+import storage from "../../redux/contador";
 
 function Navbar() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(0);
   const [currentUser, setUser] = useState([]);
   const [aprovado, setAprovado] = useState("");
+  const {setSelected} = storage()
+
 
   useEffect(() => {
     let email;
@@ -117,6 +120,7 @@ function Navbar() {
                   <li className="nav-item">
                   <a
                     onClick={() => {
+                      setSelected("sell")
                       navigate("/login");
                     }}
                     className="nav-link"
@@ -146,6 +150,15 @@ function Navbar() {
                       href="#"
                     >
                       Admin
+                    </a>
+                    <a
+                      onClick={() => {
+                        navigate("/maps");
+                      }}
+                      className="dropdown-item"
+                      href="#"
+                    >
+                      Maps
                     </a>
                   </div>
                 </li>

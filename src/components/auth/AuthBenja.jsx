@@ -8,11 +8,11 @@ import storage from '../../redux/contador'
 function AuthBenja() {
   const navigate = useNavigate()   
 
-  const {setUser  } = storage()
+  const {setUser, setSelected, selected  } = storage()
   const {user  } = storage()
 
   console.log(user)
-
+  console.log(selected)
    
 
 
@@ -24,10 +24,15 @@ function AuthBenja() {
             const provider = new firebase.auth.GoogleAuthProvider()
             auth.signInWithPopup(provider)
               .then((result)=>{
-                navigate("/")
+                if(selected === "sell"){
+                  navigate("/newSeller")
+                }else{
+                  navigate("/")
+                }                
               })
               .catch((error)=>{
                 console.log("error: ", error)
+                navigate("/")
               })
           }}
           className='btn btn-primary' >
